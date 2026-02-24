@@ -5,12 +5,9 @@ for matrix multiplication, by reducing global memory workload. Typically, the na
 row of matrix A and the first colunm of matrix B, loads them into the register, and produces a sinlge output
 for matrix C at the relevant co-ordinate i.e. C(0, 0). When repeating this process for C(0, 1), the naive kernel
 reads the entire set of matrix A+1 and B+1 again, loads them into the register, and output the sinlge Ci value -
-this read/write process repeats for the entirety of C across both A & B, with the number of read/write accesses being equal to the length of the side of the matrix.
+this read/write process repeats for the entirety of C across both A & B, with the number of read/write accesses being equal to the length of the side of the A/B matrix.
 
-When utililizing shared memory, the Tiling implementation removes this overhead by segmenting the exisintg A & B matrices
-into blocks, loading a portion of those matrices into shared memeory and procedding to draw on the cordinate
-from shared memeory for the output of C. While time complexity of both approaches remain O(n^3), Tiling reduces global memory complexity
-from O(n^3) to O(n^3/tile_size).
+When utilizing shared memory, the tiling implementation removes this overhead by segmenting the existing A and B matrices into blocks, loading portions of those matrices into shared memory, and drawing from shared memory to compute the corresponding output of C. While the time complexity of both approaches remains O(n^3), tiling reduces global memory access complexity from O(n^3) to O(n^3 / tile_size). 
 
 ## What This Project Does
 
