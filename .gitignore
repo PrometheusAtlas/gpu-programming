@@ -1,0 +1,10 @@
+.venv/
+.venv_test/
+__pycache__/
+
+matmul_benchmark_cuda
+cuda_matmul_plot.png
+cuda_matmul_results.csv
+
+cutile_diagram.html
+naive_vs_tiled.html

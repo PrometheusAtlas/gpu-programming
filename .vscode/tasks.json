@@ -1,0 +1,52 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build CUDA Benchmark",
+      "type": "shell",
+      "command": "/usr/local/cuda/bin/nvcc",
+      "args": [
+        "-O3",
+        "-arch=sm_89",
+        "matmul_benchmark.cu",
+        "-o",
+        "matmul_benchmark_cuda"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Run CUDA Benchmark",
+      "type": "shell",
+      "command": "${workspaceFolder}/matmul_benchmark_cuda",
+      "args": [
+        "1024",
+        "20"
+      ],
+      "dependsOn": "Build CUDA Benchmark",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    },
+    {
+      "label": "Plot CUDA Benchmark",
+      "type": "shell",
+      "command": "python3",
+      "args": [
+        "plot_cuda_benchmark.py",
+        "--runs",
+        "20"
+      ],
+      "dependsOn": "Build CUDA Benchmark",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    }
+  ]
+}
