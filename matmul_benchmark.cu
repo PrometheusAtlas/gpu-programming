@@ -6,17 +6,6 @@
 #include <random>
 #include <vector>
 
-// GPU Programming: Tiling - Demonstrating how CUDA naive kernel vs Tiling approach differs in computational overhead
-// for matrix multiplication, by reducing the global memory workload. Typically, the naive model calls the first row
-// row of matrix A and the first colunm of matrix B, and loads them into rgiesters, This produces a sinlge output
-// for matrix C at the relevant co-ordinate i.e. C(0, 0). When repeating this process for C(0, 1), the naive kernel
-// reads the entire set of matrix A+1 and B+1 again, loads them into the registers, and output the sinlge Ci value -
-// this read/write process repeats for the entirety of C with the number of access being = to the length of the side of the matrix. 
-// By utililizing shared memory, the Tiling apprach removes this overhead by segmenting the exisintg A & B matrices
-// into blocks (a mini matrix of matrix), loading a portion of those matrices into shared memeory and procedding to draw on the cordinate
-// from shared memeory for the out of C. While time compleixty of both approaches remain O(n^3), Tiling reduces global memory complexity
-// from O(n^3) to O(n^3/tile_size). 
-//  
 
 // ########################## EXPERIMENT SETTINGS ############################
 
